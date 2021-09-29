@@ -1,0 +1,206 @@
+WindowManagement:
+    FirstWindow:
+    SecondWindow:
+
+<FirstWindow>
+    name:"First Window"
+    GridLayout:
+        cols:1
+        Label:
+            text:"Software Para Resolução de Balanços de\nMassa em um Separador com Dois\nComponentes"
+            halign: 'center'
+            font_size: 40
+        FloatLayout:
+            Button:
+                text: "Próximo"
+                pos_hint: {"x":0.8, "y":0}
+                size_hint: 0.2,0.15
+                font_size:20
+                on_release:
+                    app.root.current = "Second Window"
+                    root.manager.transition.direction = "left"
+
+
+<SecondWindow>
+    f: _f.__self__
+    t: _t.__self__
+    b: _b.__self__
+    xf1:_xf1.__self__
+    xf2:_xf2.__self__
+    xt1:_xt1.__self__
+    xt2:_xt2.__self__
+    xb1:_xb1.__self__
+    xb2:_xb2.__self__
+    status: _status.__self__
+
+    name: "Second Window"
+
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    GridLayout:
+        cols:2
+        padding:10
+        spacing:10
+        FloatLayout:
+            canvas.before:
+                Color:
+                    rgba: 1,1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Image:
+                source:'Separador.jpeg'
+                pos_hint: {"x":0, "y":0}
+                allow_strech:True
+
+        GridLayout:
+            rows:2
+            Label:
+                text: " Insira 4 valores"
+                size_hint_y: None
+                height:50
+                font_size: 20
+
+
+            GridLayout:
+                cols: 2
+                spacing:10
+                Label:
+                    text:"F = "
+                    font_size:20
+                    color:1,1,1,1
+
+
+                TextInput:
+                    id: _f
+                    multiline: False
+                    text: 'F'
+
+                Label:
+                    text:"T = "
+                    font_size:20
+                    color:1,1,1,1
+
+                TextInput:
+                    id: _t
+                    text: 'T'
+                    multiline: False
+
+                Label:
+                    text:"B = "
+                    font_size:20
+                    color:1,1,1,1
+
+                TextInput:
+                    id: _b
+                    text: 'B'
+                    multiline: False
+
+                Label:
+                    text: r'$X_{F1}$'
+                    font_size:20
+                    color:1,1,1,1
+
+                TextInput:
+                    id: _xf1
+                    text: 'xf1'
+                    multiline: False
+
+                Label:
+                    text:"xf2 = "
+                    font_size:20
+                    color:1,1,1,1
+
+
+                TextInput:
+                    id: _xf2
+                    text: 'xf2'
+                    multiline: False
+
+                Label:
+                    text:"xt1 = "
+                    font_size:20
+                    color:1,1,1,1
+
+                TextInput:
+                    id: _xt1
+                    text: 'xt1'
+                    multiline: False
+                Label:
+                    text: 'xt2 = '
+                    font_size:20
+                    color:1,1,1,1
+
+                TextInput:
+                    id: _xt2
+                    text: 'xt2'
+                    multiline: False
+                Label:
+                    text:"xb1 = "
+                    font_size:20
+                    color:1,1,1,1
+                TextInput:
+                    id: _xb1
+                    text:'xb1'
+                    multiline: False
+                Label:
+                    text:"xb2 = "
+                    font_size:20
+                    color:1,1,1,1
+
+                TextInput:
+                    id: _xb2
+                    text: 'xb2'
+                    multiline: False
+
+                Label:
+                    text:"Status:"
+                    font_size:20
+                    color:1,1,1,1
+
+                Label:
+                    id: _status
+                    text: ''
+                    halign: 'center'
+                    font_size:15
+                    color:1,1,1,1
+
+                Button
+                    font_size:30
+                    color: 1,1,1,1
+                    text:"Limpar"
+                    on_release:
+                        root.limpar(*args)
+
+                Button
+                    font_size:30
+                    color: 1,1,1,1
+                    text:"Calcular"
+                    on_press:
+                        root.get_num(*args)
+
+
+<PopUp>
+    name: 'pop_up'
+    auto_dismiss: False
+    size_hint: None, None
+    size: 300, 240
+    title: "Valores inválidos"
+    BoxLayout:
+        orientation: 'vertical'
+        padding:10
+        spacing:10
+        Label:
+            text:'Verifique os valores inseridos'
+
+        Button:
+            text: 'OK'
+            size_hint_x: None
+            size_hint_y: None
+            size_hint:(0.35, 0.25)
+            pos_hint:{'x': 0.67}
+            on_press: root.dismiss()
